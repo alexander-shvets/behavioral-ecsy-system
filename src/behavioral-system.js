@@ -17,7 +17,7 @@ export default class BehavioralSystem extends System {
     execute(){
         const { constructor, queries, world:{componentsManager:{Components}} } = this
         const { behaviours } = constructor
-        const names = keys( queries )
+        const names = keys( queries ).filter( key => key in behaviours )
         for(const name of names ){
             const { read=[], write=[], execute: transfer=Function()} = behaviours[ name ]
             const { results=[] } = queries[ name ]
