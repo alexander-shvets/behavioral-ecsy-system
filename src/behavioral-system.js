@@ -3,32 +3,32 @@ const { entries, keys, fromEntries } = Object
 
 export default class BehavioralSystem extends System {
     static behaviours = {}
-    constructor(){
-        constructor.queries = fromEntries(
-            entries( constructor.behaviours ).map(
-                ([name, {read, write}]) => ([name, {
-                    components: [...read, ...write]
-                }])
-            )
-        )
-        super()
+    constructor( world, attributes={} ){
+        const { queries, behaviours } = constructor
+        constructor.queries = {...queries,
+            ...fromEntries(entries( behaviours ).map(
+                ([name, { read=[], write=[] }]) => 
+                ([name, { components: read.concat(write) }])
+            ))
+        }
+        super(world, attributes)
     }
 
     execute(){
-        const { constructor, queries } = this
+        const { constructor, queries, world:{componentsManager:{Components}} } = this
         const { behaviours } = constructor
         const names = keys( queries )
         for(const name of names ){
-            const { read, write, execute: transfer} = behaviours[ name ]
-            const { results } = queries[ name ]
+            const { read=[], write=[], execute: transfer=Function()} = behaviours[ name ]
+            const { results=[] } = queries[ name ]
             for(const entity of results ){
-                const from = entries( read.map( className => 
-                    [className, entity.getComponent( window[ className ] )]
+                const fromProps = fromEntries( read.map( className => 
+                    [className, entity.getComponent(Components[ className ])]
                 ))
-                const to = entries( write.map( className => 
-                    [className, entity.getMutableComponent( window[ className ] )]
+                const toProps = fromEntries( write.map( className => 
+                    [className, entity.getMutableComponent(Components[ className ])]
                 ))
-                transfer( from, to )
+                transfer( fromProps, toProps )
             }
         }
     }
