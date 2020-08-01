@@ -1,7 +1,11 @@
 # behavioral-ecsy-system
 
-This is abstract ECSY System, that splits the `execute` method into behaviours.       
-Behaviour is the pure function related to Query. This is function, that takes data from one components and transfer it to other componens.
+This is abstract [ECSY] [System], that splits the `execute` method into behaviours.       
+Behaviours is the pure functions, related to [Query]. Functions, that takes data from one components and transfer it to other componens.
+
+[ECSY]: https://ecsy.io
+[System]: https://ecsy.io/docs/#/manual/Architecture?id=systems
+[Query]: https://ecsy.io/docs/#/manual/Architecture?id=queries
 
 ### Example
 
