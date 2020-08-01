@@ -1,7 +1,7 @@
 # behavioral-ecsy-system
 
 This is abstract ECSY System, that splits the `execute` method into behaviours.       
-Behaviour is the function related to Query. This is functions, that takes data from one components and transfer it to other componens.
+Behaviour is the pure function related to Query. This is function, that takes data from one components and transfer it to other componens.
 
 ### Example
 
@@ -29,6 +29,6 @@ class InputSystem extends BehaviouralSystem {
         }
     }
 }
-// InputSystem.queries will be generated automatially
+// InputSystem.queries will be generated automatically
                                          
 ```
